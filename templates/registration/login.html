@@ -1,0 +1,42 @@
+<!-- templates/registration/login.html -->
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+<title>Login</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<div class="container-fluid">
+    <div class="position-absolute top-50 start-50 translate-middle col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <img
+            src="https://play-lh.googleusercontent.com/J01oXl4FLF-YOzINE17L7dDHr4w2EwlozqwyRTMJtNioaDUycuccWY1twuZsEUV5XTw"
+            class="rounded mx-auto d-block"
+            style="width: 80; height: 80" 
+            alt="Logo"
+          />
+          <h3 class="text-center">Welcome to PcComponentes!</h3>
+          <p class="fs-6 text-center">
+            Enter your credentials down below to enter your workspace.
+          </p>
+          <form method="post">
+            <div class="mb-3">
+                {% csrf_token %}
+                {{ form.as_p  }}
+            {% buttons %}
+            <div class="container text-center col-md-4">
+              <button
+                
+                type="submit"
+                id="login"
+              >
+                Login
+              </button>
+              {% endbuttons %}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

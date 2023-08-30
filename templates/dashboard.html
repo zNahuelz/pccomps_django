@@ -1,0 +1,15 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+
+<title>Dashboard</title>
+
+{% block content %}
+
+<h2>Amount of products: {{num_products}}</h2>
+<ul>
+  {% for i in products %}
+  <li>{{ i.name }}</li>
+  {% endfor %}
+</ul>
+<h1>WIP!</h1>
+{% endblock %}
