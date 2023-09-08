@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from account.views import Dashboard
+from account.views import Dashboard,Products,Brands,Categories
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,7 @@ urlpatterns = [
     path("accounts/", include("account.urls")),
     path('',TemplateView.as_view(template_name='home.html'),name='home'),
     path('dashboard/',view=Dashboard,name='dashboard'),
+    path('products/',view=Products,name='products'),
+    path('brands/',view=Brands,name='brands'),
+    path('categories/',view=Categories,name='categories'),
 ]

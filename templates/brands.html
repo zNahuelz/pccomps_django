@@ -1,0 +1,33 @@
+<!-- templates/brands.html -->
+{% extends "base.html" %}
+
+<title>{% block title %}PCComponentes - Brand List{% endblock %}</title>
+
+{% block content %}
+<div class="container mt-lg-4">
+    <div class="card mb-3">
+        <div class="card-header text-center">BRANDS</div>
+        <div class="card-body">
+          <h5 class="card-title">Amount of brands: {{num_brands}}</h5>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>ACTIVE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in brands %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                        <td>{{i.name}}</td>
+                        <td>{{i.is_active}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

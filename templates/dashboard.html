@@ -5,11 +5,35 @@
 
 {% block content %}
 
-<h2>Amount of products: {{num_products}}</h2>
-<ul>
-  {% for i in products %}
-  <li>{{ i.name }}</li>
-  {% endfor %}
-</ul>
-<h1>WIP!</h1>
+<div class="container mt-lg-4 col-md-3">
+  <div class="card mb-3">
+      <div class="card-header text-center fw-bold text-bg-danger">STORAGE TOOLS</div>
+      <div class="card-body">
+        <img
+        src="https://play-lh.googleusercontent.com/J01oXl4FLF-YOzINE17L7dDHr4w2EwlozqwyRTMJtNioaDUycuccWY1twuZsEUV5XTw"
+        class="rounded mx-auto d-block"
+        style="width: 80px; height: 80px" 
+        alt="Logo"
+      />
+      <h2 class="text-center fw-light fs-5">Welcome to PcComponentes Storage! </br>Here below you can find the most used tools for your work. Feel free to check them out!</h2>
+      
+        <div class="">
+      <table class="table table-borderless row ">
+        <tr class="row">
+          <td class="w-25"><a type="button" class="btn btn-warning text-light" href="{% url 'products' %}">Product List</a></td>
+          <td class="w-25"><a type="button" class="btn btn-success">New Product</a></td>
+        </tr>
+        <tr class="row">
+          <td class="w-25"><a type="button" class="btn btn-info text-light" href="{% url 'brands' %}">Brand List</a></td>
+          <td class="w-25"><a type="button" class="btn btn-success">New Brand</a></td>
+        </tr>
+        <tr class="row">
+          <td class="w-25"><a type="button" class="btn btn-danger" href="{% url 'categories' %}">Category List</a></td>
+          <td class="w-25"><a type="button" class="btn btn-success">New Category</a></td>
+        </tr>
+      </table>
+    </div>
+      </div>
+  </div>
+</div>
 {% endblock %}
