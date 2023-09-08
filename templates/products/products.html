@@ -9,7 +9,7 @@
     <div class="card mb-3">
         <div class="card-header text-center">PRODUCTS</div>
         <div class="card-body">
-          <h5 class="card-title">Amount of products: {{num_products}}</h5>
+          <h5 class="card-title text-end text-danger fw-light fs-5">Registered Products: {{num_products}}</br> Units on storage: {{amount}}</br> Storage Value: {{products_price}} $</h5>
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
@@ -30,8 +30,8 @@
                         <td>{{i.name}}</td>
                         <td>{{i.description}}</td>
                         <td>{{i.stock}}</td>
-                        <td class="text-success fw-bold">S./ {{i.buy_price}}</td>
-                        <td class="text-danger fw-bold">S./ {{i.sell_price}}</td>
+                        <td class="text-success fw-bold">{{i.buy_price}} $</td>
+                        <td class="text-danger fw-bold">{{i.sell_price}} $</td>
                         <td><img src="{{i.image}}" class="img-thumbnail" style="width: 160px; height: 100px;"></td>
                         <td>{{i.is_active}}</td>
                     </tr>

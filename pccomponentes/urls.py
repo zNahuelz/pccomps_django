@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from account.views import Dashboard,Products,Brands,Categories
-
+from account.views import Dashboard,Products,Brands,Categories,NewProduct,NewBrand,NewCategory
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +29,7 @@ urlpatterns = [
     path('products/',view=Products,name='products'),
     path('brands/',view=Brands,name='brands'),
     path('categories/',view=Categories,name='categories'),
+    path('new-product/',view=NewProduct,name='new_product'),
+    path('brands/new/',view=NewBrand,name='new_brand'),
+    path('categories/new/',view=NewCategory,name='new_category'),
 ]
