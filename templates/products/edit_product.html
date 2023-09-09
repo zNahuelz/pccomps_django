@@ -1,0 +1,32 @@
+<!-- templates/products/edit_product.html -->
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+<title>{% block title %}PCComponentes - Edit Product{% endblock %}</title>
+{% block content %}
+{% csrf_token %}
+
+<div class="container justify-content-center mt-4">
+    <div class="col-10 col-md-4 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form | crispy}}
+                    {% if alert == 1 %}
+                    <h5 class="text-success text-center">Product updated succesfully!</h5>
+                    {% elif alert == 0 %}
+                    <h5 class="text-danger text-center">Error! Unable to update product. Try Again.</h5>
+                    {% else %}
+                    {% endif %}
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'products'%}" class="btn btn-secondary">Cancel</a>
+                        &nbsp;
+                        <input type="submit" value="Update" class="btn btn-warning">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

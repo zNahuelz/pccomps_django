@@ -15,6 +15,7 @@
                         <th>ID</th>
                         <th>NAME</th>
                         <th>ACTIVE</th>
+                        <th>TOOLS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,7 +23,17 @@
                     <tr>
                         <td>{{i.id}}</td>
                         <td>{{i.name}}</td>
-                        <td>{{i.is_active}}</td>
+                        {% if i.is_active %}
+                        <td class="text-success fw-bold">TRUE</td>
+                        {% else %}
+                        <td class="text-danger fw-bold">FALSE</td>
+                        {% endif %}
+                        <td>
+                            <div class="btn-group-horizontal" role="group">
+                            <a class="btn btn-success text-light" href="detail/{{i.id}}">DETAILS</a>
+                            <a class="btn btn-warning text-light" href="edit/{{i.id}}">EDIT</a>
+                            </div>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

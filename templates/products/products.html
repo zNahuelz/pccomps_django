@@ -4,7 +4,6 @@
 <title>{% block title %}PCComponentes - Product List{% endblock %}</title>
 
 {% block content %}
-
 <div class="container mt-lg-4">
     <div class="card mb-3">
         <div class="card-header text-center">PRODUCTS</div>
@@ -17,10 +16,10 @@
                         <th>NAME</th>
                         <th>DESCRIPTION</th>
                         <th>STOCK</th>
-                        <th>SELL PRICE</th>
                         <th>BUY PRICE</th>
                         <th>IMAGE</th>
                         <th>ACTIVE</th>
+                        <th>TOOLS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,9 +30,18 @@
                         <td>{{i.description}}</td>
                         <td>{{i.stock}}</td>
                         <td class="text-success fw-bold">{{i.buy_price}} $</td>
-                        <td class="text-danger fw-bold">{{i.sell_price}} $</td>
                         <td><img src="{{i.image}}" class="img-thumbnail" style="width: 160px; height: 100px;"></td>
-                        <td>{{i.is_active}}</td>
+                        {% if i.is_active %}
+                        <td class="text-success fw-bold">TRUE</td>
+                        {% else %}
+                        <td class="text-danger fw-bold">FALSE</td>
+                        {% endif %}
+                        <td>
+                            <div class="btn-group-vertical" role="group">
+                            <a class="btn btn-success text-light" href="detail/{{i.id}}">DETAILS</a>
+                            <a class="btn btn-warning text-light" href="edit/{{i.id}}">EDIT</a>
+                            </div>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -1,9 +1,10 @@
 <!-- templates/registration/login.html -->
 {% load bootstrap5 %}
+{% load crispy_forms_tags %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% block content %}
-<title>Login</title>
+<title>{% block title %}PCComponentes - Login{% endblock %}</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <div class="container-fluid">
     <div class="position-absolute top-50 start-50 translate-middle col-md-3">

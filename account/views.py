@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.db.models import Sum
 from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm,ProductForm,BrandForm,CategoryForm
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Product,Brand,Category
 
 class SignUpView(CreateView):
@@ -34,6 +34,7 @@ def Products(request):
             'products': products,
             'amount': amount['stock__sum'],
             'products_price': round(products_price['sell_price__sum'],2),
+            'prod_id':0,
         }
         return render(request, 'products/products.html',context=context)
     else:
@@ -113,3 +114,51 @@ def NewCategory(request):
         return render(request,'categories/new_category.html',context=context)
     else:
         return redirect('home')
+    
+def EditProduct(request,id):
+    product = get_object_or_404(Product,id=id)
+    context = {
+        'form': ProductForm(instance=product)
+    }
+    if request.method == 'POST':
+        form = ProductForm(data=request.POST,instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('products')
+    return render(request,'products/edit_product.html',context=context)
+
+def ProductDetail(request,id):
+    product = get_object_or_404(Product,id=id)
+    context = {
+        'product': product
+    }
+    return render(request,'products/product_details.html',context=context)
+
+def DeleteProduct(request,id):
+    product = get_object_or_404(Product, id=id)
+    product.delete()
+    return redirect('products')
+
+def EditCategory(request,id):
+    category = get_object_or_404(Category,id=id)
+    context = {
+        'form': CategoryForm(instance=category),
+    }
+    if request.method == 'POST':
+        form = CategoryForm(data=request.POST,instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('categories')
+    return render(request,'categories/edit_category.html',context=context)
+
+def EditBrand(request, id):
+    brand = get_object_or_404(Brand,id=id)
+    context = {
+        'form' : BrandForm(instance=brand),
+    }
+    if request.method == 'POST':
+        form = BrandForm(data=request.POST,instance=brand)
+        if form.is_valid():
+            form.save()
+            return redirect('brands')
+    return render(request,'brands/edit_brand.html',context=context)

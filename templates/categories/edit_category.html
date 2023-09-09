@@ -1,0 +1,26 @@
+<!-- templates/category/edit_category.html -->
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+<title>{% block title %}PCComponentes - Edit Category{% endblock %}</title>
+{% block content %}
+{% csrf_token %}
+
+<div class="container justify-content-center mt-4">
+    <div class="col-10 col-md-4 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form | crispy}}
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'categories'%}" class="btn btn-secondary">Cancel</a>
+                        &nbsp;
+                        <input type="submit" value="Update" class="btn btn-warning">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+<!-- templates/products/product_details.html -->
+{% extends "base.html" %}
+
+<title>{% block title %}PCComponentes | {{product.name}} {% endblock %}</title>
+
+{% block content %}
+<div class="container mt-lg-4">
+    <div class="card mb-3 border-danger">
+        <div class="card-header text-center text-light bg-danger">CURRENTLY WATCHING: {{product.name}} | PRODUCT ID: {{product.id}}</div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                  <div class="col-3">
+                    <img src="{{product.image}}" class="img-thumbnail img-fluid">
+                  </div>
+                  <div class="col">
+                    <h5 class="">ID: {{product.id}}</h5>
+                    <h5 class="">NAME: {{product.name}}</h5>
+                    <p class="fw-medium lh-lg">CATEGORY: {{product.category}} 
+                    </br>BRAND: {{product.brand}}
+                    </br>DESCRIPTION: {{product.description}} 
+                    </br>STOCK: {{product.stock}} Units. 
+                    </br>BUY PRICE: {{product.buy_price}} $
+                    </br>SELL PRICE: {{product.sell_price}} $
+                    </br>ACTIVE: {{product.is_active}}
+                    </p>
+                    <div class="btn-group-horizontal" role="group">
+                        <a class="btn btn-success text-light" href="{% url 'products'%}">BACK</a>
+                        <a class="btn btn-warning text-light" href="/products/edit/{{product.id}}">EDIT</a>
+                        <btn class="btn btn-danger text-light" onclick="message()">DELETE</btn>
+                        <input type="hidden" id="productName" name="productName" value="{{ product.name }}">
+                        <input type="hidden" id="productId" name="productId" value="{{ product.id }}">
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function message(){
+        var p = document.getElementById("productName").value;
+        var p_id = document.getElementById("productId").value;
+        var url = window.location.toString();
+        const question = confirm("Are you sure? This action will delete the following product: "+p)
+        if(question){
+            window.location.replace(url.replace('/detail/','/delete/'))
+        }
+    }
+</script>
+{% endblock %}
