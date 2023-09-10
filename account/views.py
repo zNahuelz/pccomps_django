@@ -2,7 +2,9 @@
 from django.urls import reverse_lazy
 from django.db.models import Sum
 from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import PasswordChangeForm
 from .forms import CustomUserCreationForm,ProductForm,BrandForm,CategoryForm
+from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import Product,Brand,Category
 
@@ -116,49 +118,87 @@ def NewCategory(request):
         return redirect('home')
     
 def EditProduct(request,id):
-    product = get_object_or_404(Product,id=id)
-    context = {
-        'form': ProductForm(instance=product)
-    }
-    if request.method == 'POST':
-        form = ProductForm(data=request.POST,instance=product)
-        if form.is_valid():
-            form.save()
-            return redirect('products')
-    return render(request,'products/edit_product.html',context=context)
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product,id=id)
+        context = {
+            'form': ProductForm(instance=product)
+        }
+        if request.method == 'POST':
+            form = ProductForm(data=request.POST,instance=product)
+            if form.is_valid():
+                form.save()
+                return redirect('products')
+        return render(request,'products/edit_product.html',context=context)
+    else:
+        return redirect('home')
 
 def ProductDetail(request,id):
-    product = get_object_or_404(Product,id=id)
-    context = {
-        'product': product
-    }
-    return render(request,'products/product_details.html',context=context)
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product,id=id)
+        context = {
+            'product': product
+        }
+        return render(request,'products/product_details.html',context=context)
+    else:
+        return redirect('home')
 
 def DeleteProduct(request,id):
-    product = get_object_or_404(Product, id=id)
-    product.delete()
-    return redirect('products')
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product, id=id)
+        product.delete()
+        return redirect('products')
+    else:
+        return redirect('home')
 
 def EditCategory(request,id):
-    category = get_object_or_404(Category,id=id)
-    context = {
-        'form': CategoryForm(instance=category),
-    }
-    if request.method == 'POST':
-        form = CategoryForm(data=request.POST,instance=category)
-        if form.is_valid():
-            form.save()
-            return redirect('categories')
-    return render(request,'categories/edit_category.html',context=context)
+    if request.user.is_authenticated:
+        category = get_object_or_404(Category,id=id)
+        context = {
+            'form': CategoryForm(instance=category),
+        }
+        if request.method == 'POST':
+            form = CategoryForm(data=request.POST,instance=category)
+            if form.is_valid():
+                form.save()
+                return redirect('categories')
+        return render(request,'categories/edit_category.html',context=context)
+    else:
+        return redirect('home')
 
 def EditBrand(request, id):
-    brand = get_object_or_404(Brand,id=id)
-    context = {
-        'form' : BrandForm(instance=brand),
-    }
-    if request.method == 'POST':
-        form = BrandForm(data=request.POST,instance=brand)
-        if form.is_valid():
-            form.save()
-            return redirect('brands')
-    return render(request,'brands/edit_brand.html',context=context)
+    if request.user.is_authenticated:
+        brand = get_object_or_404(Brand,id=id)
+        context = {
+            'form' : BrandForm(instance=brand),
+        }
+        if request.method == 'POST':
+            form = BrandForm(data=request.POST,instance=brand)
+            if form.is_valid():
+                form.save()
+                return redirect('brands')
+        return render(request,'brands/edit_brand.html',context=context)
+    else:
+        return redirect('home')
+
+def UserProfile(request):
+    if request.user.is_authenticated:
+        return render(request,'user/profile.html')
+    else:
+        return redirect('home')
+    
+def ChangePassword(request):
+    if request.user.is_authenticated:
+        form = PasswordChangeForm(request.user)
+        context = {
+            'form': form,
+            'alert': 2
+        }
+        if request.method == 'POST':
+            form = PasswordChangeForm(request.user,request.POST)
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request,user)
+                context['alert'] = 1
+            else:
+                context['alert'] = 0
+        return render(request,'user/change_password.html',context=context)

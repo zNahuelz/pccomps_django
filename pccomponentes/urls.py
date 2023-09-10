@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from account.views import Dashboard,Products,Brands,Categories,NewProduct,NewBrand,NewCategory,EditProduct,ProductDetail,DeleteProduct,EditCategory,EditBrand
+from account.views import Dashboard,Products,Brands,Categories,NewProduct,NewBrand,NewCategory,EditProduct,ProductDetail,DeleteProduct,EditCategory,EditBrand,UserProfile,ChangePassword
 from django.shortcuts import redirect
 
 urlpatterns = [
@@ -37,4 +37,6 @@ urlpatterns = [
     path('products/delete/<id>/',view=DeleteProduct,name='delete_product'),
     path('categories/edit/<id>/',view=EditCategory,name='edit_category'),
     path('brands/edit/<id>/',view=EditBrand,name='edit_brand'),
+    path('user/profile/',view=UserProfile,name='user_profile'),
+    path('user/change_password/',view=ChangePassword,name='change_password'),
 ]

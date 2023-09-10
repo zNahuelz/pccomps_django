@@ -1,0 +1,39 @@
+<!-- templates/user/account.html -->
+{% extends "base.html" %}
+
+<title>{% block title %}PCComponentes - Profile {% endblock %}</title>
+
+{% block content %}
+<div class="container mt-lg-4">
+    <div class="card mb-3 border-primary">
+        <div class="card-header text-center text-light bg-primary">User Profile</div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                  <div class="col-3">
+                    <img src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png" class="img-fluid">
+                  </div>
+                  <div class="col">
+                    <h5 class="">ID: {{user.id}}</h5>
+                    <h5 class="">USERNAME: {{user.username}}</h5>
+                    <h5 class="fw-medium">E-MAIL: {{user.email}} </h5>
+                    <h5 class="fw-medium">DATE JOINED: {{user.date_joined}} </h5>
+                    <h5 class="fw-medium">LAST LOGIN: {{user.last_login}} </h5>
+                    <h5 class="fw-medium">ROLE: 
+                        {% if user.is_superuser == True %} 
+                        ADMIN
+                        {% else %}
+                        USER
+                        {% endif %}
+                    </h5>
+                    <div class="btn-group-horizontal" role="group">
+                        <a class="btn btn-primary text-light" href="{% url 'dashboard'%}">BACK</a>
+                        <a class="btn btn-danger text-light" href="{% url 'change_password'%}">CHANGE PASSWORD</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
